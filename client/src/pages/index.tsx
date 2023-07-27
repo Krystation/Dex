@@ -1,12 +1,24 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import {useEffect, useState} from 'react'
+import axios from "axios"
 
 export default function Home() {
-  return (
+    type result = {
+        message: string;
+    };
+    type GetResponse = {
+        data: result[];
+    };
+
+    let endPoint = 'http://127.0.0.1:8000/openai';
+    const [post, setPost] = useState("Loading");
+    useEffect(()=>{
+        axios.get(endPoint).then((response) => {
+            setPost(response.data.message);
+        });
+    }, []);
+
+    return (
     <>
       <Head>
         <title>PokeDex</title>
@@ -15,7 +27,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>Hello</div>
+        <div>{post}</div>
       </main>
     </>
   )

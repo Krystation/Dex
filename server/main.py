@@ -14,7 +14,7 @@ app = FastAPI()
 #url = "https://api.elevenlabs.io/v1/text-to-speech/XxAi7JopeFxuS44x948s"
 
 #CORS
-origins = ["http://127.0.0.1:8000/", "http://localhost:3000/"]
+origins = ["*", "http://127.0.0.1:8000/", "http://localhost:3000/"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
